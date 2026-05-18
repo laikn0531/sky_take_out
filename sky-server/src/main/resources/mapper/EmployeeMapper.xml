@@ -13,8 +13,8 @@
         order by create_time desc
     </select>
 
-    <!--根据主键动态修改属性-->
-    <update id="update">
+    <!--根据主键动态修改属性(启用禁用员工账号、根据ID编辑员工信息)-->
+    <update id="updateById">
         update employee
         <set>
             <if test="name != null and name !=''">name = #{name},</if>

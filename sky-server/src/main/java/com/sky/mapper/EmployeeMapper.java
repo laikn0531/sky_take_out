@@ -14,7 +14,7 @@ import java.util.List;
 public interface EmployeeMapper {
 
     /**
-     * 根据用户名查询员工
+     * 根据用户名查询员工(登录接口)
      * @param username
      * @return
      */
@@ -37,8 +37,16 @@ public interface EmployeeMapper {
     Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
 
     /**
-     * 根据主键动态修改属性
+     * 根据主键动态修改属性(启用禁用员工账号、根据ID编辑员工信息)
      * @param employee
      */
-    void update(Employee employee);
+    void updateById(Employee employee);
+
+    /**
+     * 根据id查询员工
+     * @param id
+     * @return
+     */
+    @Select("select * from employee where id = #{id}")
+    Employee getById(Long id);
 }
