@@ -3,10 +3,12 @@ package com.sky.mapper;
 import com.github.pagehelper.Page;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeePageQueryDTO;
+import com.sky.dto.PasswordEditDTO;
 import com.sky.entity.Employee;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -49,4 +51,20 @@ public interface EmployeeMapper {
      */
     @Select("select * from employee where id = #{id}")
     Employee getById(Long id);
+
+    /**
+     * 根据id查询密码
+     * @param passwordEditDTO
+     * @return
+     */
+    @Select("select password from employee where id = #{empId}")
+    String getOldPasswordById(PasswordEditDTO passwordEditDTO);
+
+    /**
+     * 根据id修改密码
+     * @param passwordEditDTO
+     */
+    @Update("update employee set password = #{newPassword} where id = #{empId}")
+    void updatePasswordById(PasswordEditDTO passwordEditDTO);
+
 }
