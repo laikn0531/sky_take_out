@@ -11,10 +11,7 @@ import com.sky.dto.EmployeeLoginDTO;
 import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.dto.PasswordEditDTO;
 import com.sky.entity.Employee;
-import com.sky.exception.AccountLockedException;
-import com.sky.exception.AccountNotFoundException;
-import com.sky.exception.BaseException;
-import com.sky.exception.PasswordErrorException;
+import com.sky.exception.*;
 import com.sky.mapper.EmployeeMapper;
 import com.sky.result.PageResult;
 import com.sky.service.EmployeeService;
@@ -182,7 +179,8 @@ public class EmployeeServiceImpl implements EmployeeService {
             // 修改密码
             employeeMapper.updatePasswordById(passwordEditDTO);
         } else {
-            throw new BaseException("原密码错误, 请重新输入");
+//            throw new BaseException("原密码错误, 请重新输入");
+            throw new PasswordEditFailedException("原密码错误, " + MessageConstant.PASSWORD_EDIT_FAILED + " ,请重新输入");
         }
     }
 }
