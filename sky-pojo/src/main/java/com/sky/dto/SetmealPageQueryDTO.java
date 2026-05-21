@@ -1,9 +1,9 @@
 package com.sky.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
-
 @Data
 public class SetmealPageQueryDTO implements Serializable {
 
