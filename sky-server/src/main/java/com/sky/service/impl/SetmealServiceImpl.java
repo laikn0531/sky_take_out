@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -66,7 +67,6 @@ public class SetmealServiceImpl implements SetmealService {
     @Override
     @Transactional
     public void deleteBatch(List<Long> ids) {
-
         ids.forEach(id -> {
             Setmeal setmeal = setmealMapper.getById(id);
             if (setmeal.getStatus() == StatusConstant.ENABLE){
@@ -76,5 +76,42 @@ public class SetmealServiceImpl implements SetmealService {
 
         setmealMapper.deleteBatch(ids);
         setmealDishMapper.deleteBatch(ids);
+    }
+
+    /**
+     * 根据id查询套餐
+     * @param id
+     * @return
+     */
+    @Override
+    public SetmealVO getByIdWithDish(Long id) {
+        Setmeal setmeal = setmealMapper.getById(id);
+        List<SetmealDish> setmealDishes =setmealDishMapper.getBySetmealId(id);
+
+        SetmealVO setmealVO = new SetmealVO();
+        BeanUtils.copyProperties(setmeal, setmealVO);
+        setmealVO.setSetmealDishes(setmealDishes);
+
+        return setmealVO;
+    }
+
+    /**
+     * 修改套餐
+     * @param setmealDTO
+     */
+    @Override
+    @Transactional
+    public void update(SetmealDTO setmealDTO) {
+        Setmeal setmeal = new Setmeal();
+        BeanUtils.copyProperties(setmealDTO, setmeal);
+
+        setmealMapper.update(setmeal);
+
+        setmealDishMapper.deleteBySetmealId(setmealDTO.getId());
+        List<SetmealDish> setmealDishes = setmealDTO.getSetmealDishes();
+        setmealDishes.forEach(sd -> {
+            sd.setSetmealId(setmealDTO.getId());
+        });
+        setmealDishMapper.insertBatch(setmealDishes);
     }
 }
