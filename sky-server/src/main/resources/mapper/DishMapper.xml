@@ -19,4 +19,12 @@
         </where>
         order by d.create_time desc
     </select>
+
+    <!--根据id批量删除菜品-->
+    <delete id="deleteByIds">
+        delete from dish where id in
+        <foreach collection="ids" item="id" separator=", " open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>
