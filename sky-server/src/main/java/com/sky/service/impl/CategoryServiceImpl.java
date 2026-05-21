@@ -41,7 +41,7 @@ public class CategoryServiceImpl implements CategoryService {
         BeanUtils.copyProperties(categoryDTO, category);
 
         //分类状态初始化为"禁用(0)"
-        category.setStatus(StatusConstant.DISABLE);
+        /*category.setStatus(StatusConstant.DISABLE);*/
 
 /*        category.setCreateTime(LocalDateTime.now());
         category.setUpdateTime(LocalDateTime.now());
