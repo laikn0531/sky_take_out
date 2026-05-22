@@ -10,6 +10,7 @@
     </insert>
 
     <!--套餐分页查询-->
+    <!--前端需要的categoryName(分类名称)在setmeal表里并没有，所以需要多表联查category表-->
     <select id="pageQuery" resultType="com.sky.vo.SetmealVO">
         select s.*, c.name categoryName from setmeal s left outer join category c on s.category_id = c.id
         <where>

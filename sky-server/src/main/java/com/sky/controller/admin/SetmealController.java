@@ -56,14 +56,14 @@ public class SetmealController {
      */
     @DeleteMapping
     @ApiOperation(value = "删除套餐")
-    public Result<String> delete(@RequestParam List<Long> ids){
+    public Result<String> delete(@RequestParam List<Long> ids){ // 注意：接收List集合参数必须加@RequestParam，否则Spring无法解析多个同名Query参数。如果是数组则不需要加
         log.info("删除套餐: {}", ids);
         setmealService.deleteBatch(ids);
         return Result.success();
     }
 
     /**
-     * 根据id查询套餐
+     * 根据id查询套餐，用于修改页面回显数据
      * @param id
      * @return
      */

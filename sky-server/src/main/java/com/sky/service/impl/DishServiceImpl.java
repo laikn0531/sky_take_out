@@ -159,10 +159,11 @@ public class DishServiceImpl implements DishService {
      * @return
      */
     @Override
-    public List<Dish> list(Long categoryId) {
+    public List<Dish> list(Long categoryId, String name) {
         Dish dish = new Dish();
         dish.setCategoryId(categoryId);
         dish.setStatus(StatusConstant.ENABLE);
+        dish.setName(name);
         return dishMapper.list(dish);
 
     }

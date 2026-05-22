@@ -54,5 +54,5 @@ public interface DishService {
      * @param categoryId
      * @return
      */
-    List<Dish> list(Long categoryId);
+    List<Dish> list(Long categoryId, String name);
 }
